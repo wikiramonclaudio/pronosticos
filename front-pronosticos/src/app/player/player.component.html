@@ -1,0 +1,29 @@
+<div *ngIf="botonActivo == 1 || !botonActivo">
+<i   class="fa fa-play-circle-o" aria-hidden="true" style="
+    position:fixed;
+    font-size: 40px;
+    color: white;
+    bottom:10px;
+    left:10px;
+    padding:10px;
+    background:#0D76C7;
+    border-radius:50%;
+    border: 2px solid white;
+" (click)="reproducirMusica();"></i>    
+</div>
+
+<div *ngIf="botonActivo == 2" >
+<i  class="fa fa-stop-circle-o" aria-hidden="true" style="
+    position:fixed;
+    font-size: 40px;
+    color: white;
+    bottom:10px;
+    left:10px;
+    background:##0D76C7;
+    padding:10px;
+    background:#5cb85c;
+    border-radius:50%;
+    border: 2px solid white;
+" (click)="pararMusica(); "></i>    
+</div>
+

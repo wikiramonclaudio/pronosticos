@@ -1,0 +1,36 @@
+{
+  "name": "pronosticos-deportivos",
+  "version": "1.0.0",
+  "description": "Proyecto para ofrecer los mejores pronósticos deportivos y de tenis al usuario",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jose Vazquez Prada",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
+    "connect-multiparty": "^2.2.0",
+    "cors": "^2.8.5",
+    "crypto-js": "^3.1.9-1",
+    "express": "^4.17.1",
+    "express-fileupload": "1.1.5",
+    "jwt-simple": "^0.5.6",
+    "moment": "^2.24.0",
+    "mongoose": "^5.6.9",
+    "mongoose-paginate": "^5.0.3",
+    "mongoose-pagination": "^1.0.0",
+    "newrelic": "^5.11.0",
+    "nodemailer": "^6.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  },
+  "engines": {
+    "node": "6.9.1",
+    "npm": "3.10.8"
+  }
+}

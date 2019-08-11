@@ -1,0 +1,12 @@
+<div class="container" id="charts-content">    
+    <h4 class="subtitle is-4 has-text-centered">
+        Estadísticas
+    </h4>
+
+    <div class="row">
+        <div class="col-md-8 col-sm-12 col-md-offset-2">
+            <app-grafico-dona [type]="chartData.type" [labels]="chartData.labels" [data]="chartData.data" [leyenda]="chartData.leyenda" [yield]="yieldPercent"></app-grafico-dona>
+        </div>
+    </div>
+</div>
+

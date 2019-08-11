@@ -1,0 +1,66 @@
+<!--<h2>-->
+<!--  Pagina de contacto-->
+<!--</h2>-->
+<div *ngIf="statusOK" class="col-sm-12">
+      <div class="alert alert-success">
+        Muchas gracias! Tu mensaje se ha enviado correctamente, te contestasremos lo antes posible. 
+      </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <form #contactoForm="ngForm" (ngSubmit)="onSubmit()">
+      <section id="contact" class="content-section text-center">
+              <div class="contact-section">
+                  <div class="container">
+                    <!--<h2 class="h2-customized">Contacto</h2>-->
+                    <p>Envíanos tus dudas o sugerencias rellenando el formulario o a través de las redes sociales</p>
+                    <div class="row">
+                      <div class="col-md-6 col-md-offset-3">
+                        <form class="form-horizontal">
+                          <div class="form-group">
+                            <label for="exampleInputName2">Nombre</label>
+                            <input type="text" class="form-control" id="exampleInputName2" placeholder="Nombre"  #nombre="ngModel" [(ngModel)]="datosContacto.nombre" name="nombre" required>
+                            <div *ngIf="nombre.errors && (nombre.dirty || nombre.touched) && submitted" class="alert alert-danger">
+                               <div [hidden]="!nombre.errors.required">
+                                      Elnombre es obligatorio
+                               </div>   
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="exampleInputEmail2">Email</label>
+                            <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email" [(ngModel)]="datosContacto.email" name="email" #email="ngModel" required>
+                            <div *ngIf="email.errors && (email.dirty || email.touched) && submitted" class="alert alert-danger">
+                               <div [hidden]="!nombre.errors.required">
+                                      El email es obligatorio
+                               </div>   
+                            </div>
+                          </div>
+                          <div class="form-group ">
+                            <label for="exampleInputText">Tu mensaje</label>
+                           <textarea  class="form-control" placeholder="Mensaje..." [(ngModel)]="datosContacto.mensaje" name="mensaje" #mensaje="ngModel" required></textarea> 
+                           <div *ngIf="mensaje.errors && (mensaje.dirty || mensaje.touched) && submitted" class="alert alert-danger">
+                               <div [hidden]="!nombre.errors.required">
+                                      El mensaje es obligatorio
+                               </div>   
+                            </div>
+                          </div>
+                          <button type="submit" class="btn btn-success" (click)="onSubmit()">Enviar mensaje</button>
+                        </form>
+                        <hr>
+                          <!--<h3 class="h3-customized">Redes sociales</h3>-->
+                        <ul class="list-inline banner-social-buttons">
+                          <li><a href="#" class="btn btn-primary btn-lg"><i class="fa fa-twitter"> <span class="network-name"></span></i></a></li>
+                          <li><a href="#" class="btn btn-primary btn-lg"><i class="fa fa-facebook"> <span class="network-name"></span></i></a></li>
+                          <li><a href="#" class="btn btn-danger btn-lg"><i class="fa fa-youtube-play"> <span class="network-name"></span></i></a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+      </section>
+      </form>
+    </div>
+  </div>
+</div>
+      

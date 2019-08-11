@@ -1,0 +1,168 @@
+<div class="container" *ngIf="identity && identity.role == 'ROLE_ADMIN' && active">
+   <h4 class="subtitle is-4 has-text-centered">
+      {{titulo}}
+   </h4>
+   <form #pronosticoForm="ngForm" (ngSubmit)="onSubmit(pronostico)">
+   <div class="col-md-6 col-md-offset-3 col-sm-12">
+         <div class="form-radio is-marginless">
+         <label class="is-paddingless" for="deporte">Deporte</label>
+         <div class="radio" id="deporte">
+            <label>
+                  <input autocomplete="off" type="radio" [(ngModel)]="pronostico.deporte"  name="deporte" value="Tenis" #deporte="ngModel">
+                  <i class="helper"></i>
+                  Tenis
+            </label>
+         </div>
+         <div class="radio">
+            <label>
+                  <input autocomplete="off" type="radio" [(ngModel)]="pronostico.deporte"  name="deporte" value="Fútbol" #deporte="ngModel">
+                  <i class="helper"></i>
+                  Fútbol
+            </label>
+         </div>
+         <div class="radio">
+            <label>
+                  <input autocomplete="off" type="radio" [(ngModel)]="pronostico.deporte"  name="deporte" value="Baloncesto" #deporte="ngModel">
+                  <i class="helper"></i>
+                  Baloncesto
+            </label>
+         </div>
+      </div>
+      <div *ngIf="deporte.errors && (deporte.dirty || deporte.touched)"
+         class="alert alert-danger">
+         <div [hidden]="!deporte.errors.required">
+            El deporte es obligatorio
+         </div>
+      </div>
+      <div class="form-group-p">
+         <input autocomplete="off" type="text" class="form-control" id="torneo" [(ngModel)]="pronostico.torneo"
+         #torneo="ngModel" name="torneo" required>
+         <label class="control-label" for="torneo">Torneo</label><i class="bar"></i>
+         <div *ngIf="torneo.errors && (torneo.dirty || torneo.touched)"
+            class="alert alert-danger">
+            <div [hidden]="!torneo.errors.required">
+               El torneo es obligatorio
+            </div>
+         </div>
+      </div>
+      <div class="form-group-p">
+         <input autocomplete="off" type="text" class="form-control" id="partido" [(ngModel)]="pronostico.partido"
+         #partido="ngModel" name="partido" required>
+         <label class="control-label" for="partido">Partido</label>
+         <i class="bar"></i>
+         <div *ngIf="partido.errors && (partido.dirty || partido.touched)" class="alert alert-danger">
+            <div [hidden]="!partido.errors.required">
+               El partido es obligatorio
+            </div>
+         </div>
+      </div>
+      <div class="form-group-p">
+         <input autocomplete="off" type="date" class="form-control has-value" id="fecha" [(ngModel)]="pronostico.fecha"
+         #fecha="ngModel" name="fecha" required >         
+         <label class="control-label" for="fecha">Fecha</label>
+         <i class="bar"></i>
+         <div *ngIf="fecha.errors && (fecha.dirty || fecha.touched)" class="alert alert-danger">
+            <div [hidden]="!torneo.errors.required">
+               La fecha es obligatoria
+            </div>
+         </div>
+      </div>
+      <div class="form-group-p">
+         <input autocomplete="off" type="text" class="form-control" id="hora" [(ngModel)]="pronostico.hora"
+         #hora="ngModel" name="hora" required>
+         <label for="hora" class="control-label">Hora</label>
+         <i class="bar"></i>
+         <div *ngIf="hora.errors && (hora.dirty || hora.touched)" class="alert alert-danger">
+            <div [hidden]="!hora.errors.required">
+               El campo hora es obligatorio
+            </div>
+         </div>
+      </div>
+      <div class="form-group-p">
+         <input autocomplete="off" type="text" class="form-control" id="apuesta" [(ngModel)]="pronostico.apuesta"
+         #apuesta="ngModel" name="apuesta" required >
+         <label for="apuesta" class="control-label">Pronóstico</label>
+         <i class="bar"></i>
+         <div *ngIf="apuesta.errors && (apuesta.dirty || apuesta.touched)" class="alert alert-danger">
+            <div [hidden]="!pronostico.errors.required">
+               El pronostico es obligatorio
+            </div>
+         </div>
+      </div>
+      <div class="form-group-p">
+         <textarea type="text" class="form-control" id="descripcion" [(ngModel)]="pronostico.descripcion"
+         #descripcion="ngModel" name="descripcion" required ></textarea>
+         <label class="control-label" for="descripcion">Descripción</label>
+         <i class="bar"></i>
+         <div *ngIf="descripcion.errors && (descripcion.dirty || descripcion.touched)" class="alert alert-danger">
+            <div [hidden]="!descripcion.errors.required">
+               El campo descripcion es obligatorio
+            </div>
+         </div>
+      </div>
+      <div class="form-group-p">
+         <input autocomplete="off" type="number" class="form-control has-value" id="cuota" [(ngModel)]="pronostico.cuota"
+         #cuota="ngModel" name="cuota" required >
+         <label for="cuota" class="control-label open-field">Cuota</label>
+         <i class="bar"></i>
+         <div *ngIf="cuota.errors && (cuota.dirty || cuota.touched)" class="alert alert-danger">
+            <div [hidden]="!cuota.errors.required">
+               El campo cuota es obligatorio
+            </div>
+         </div>
+      </div>
+      <div class="form-group-p" class="hide">
+         <input autocomplete="off" type="date" class="form-control" id="fecha_publicacion" [(ngModel)]="pronostico.fecha_publicacion"
+         #fecha_publicacion="ngModel" name="fecha_publicacion" required>
+         <label class="label-control" for="fecha_publicacion">Fecha</label>
+         <i class="bar"></i>
+         <div *ngIf="fecha_publicacion.errors && (fecha_publicacion.dirty || fecha_publicacion.touched)" class="alert alert-danger">
+            <div [hidden]="!torneo.errors.required">
+               La fecha es obligatoria
+            </div>
+         </div>
+      </div>      
+      <div class="form-group-p">
+         <input autocomplete="off" type="text" class="form-control" id="imageUrl" [(ngModel)]="pronostico.imageUrl"
+         #imageUrl="ngModel" name="imageUrl" required>
+         <label class="control-label" for="imageUrl">Imagen</label>
+         <i class="bar"></i>
+         <div *ngIf="imageUrl.errors && (imageUrl.dirty || imageUrl.touched)" class="alert alert-danger">
+            <div [hidden]="!imageUrl.errors.required">
+               El campo imageUrl es obligatorio
+            </div>
+         </div>
+      </div>
+      <div class="form-radio is-marginless">
+            <label class="is-paddingless">Resultado</label>
+            <div class="radio">
+               <label>
+                     <input type="radio" [(ngModel)]="pronostico.resultado"  name="resultado" value="ganada" #resultado="ngModel">
+                     <i class="helper"></i>
+                     Ganada
+               </label>
+            </div>
+            <div class="radio">
+                  <label>
+                        <input type="radio" [(ngModel)]="pronostico.resultado"  name="resultado" value="perdida" #resultado="ngModel">
+                        <i class="helper"></i>
+                        Perdida
+                  </label>
+               </div>
+      </div>
+      <div class="checkbox">
+         <label>
+            <input type="checkbox" [(ngModel)]="pronostico.finalizado"
+            #finalizado="ngModel" name="finalizado" required/>
+            <i class="helper"></i>Finalizado
+         </label>
+      </div>
+      <div class="form-control-p" style="padding-bottom: 30px">
+         <button type="submit" class="button is-success is-rounded">
+            <i class="fas fa-save" style="margin-right: 5px"></i>
+            Guardar pronóstico
+         </button>
+      </div>
+   </div>
+   </form>
+</div>
