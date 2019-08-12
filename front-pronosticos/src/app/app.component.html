@@ -83,10 +83,10 @@
          <i class="far fa-chart-bar fa-x2"></i>
          Estadísticas
        </a>
-       <a class="navbar-item" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=C47XQVYHDSKZU" target="_blank">
+       <!-- <a class="navbar-item" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=C47XQVYHDSKZU" target="_blank">
          <i class="fas fa-hand-holding-usd fa-x2"></i>
          Propina
-       </a>
+       </a> -->
       
      </div>
  
@@ -113,7 +113,7 @@
            </p>
 
            <p class="control" *ngIf="identity && identity!= undefined">
-               <a class="button is-primary is-rounded" (click)="logout();">
+               <a class="button is-light is-rounded" (click)="logout();">
                  <span class="icon">
                    <i class="fas fa-door-open"></i>
                  </span>
@@ -215,4 +215,4 @@
 <div [class.hidden]="showLogin">
    <router-outlet></router-outlet>
 </div>
-<app-player></app-player>
+<!-- <app-player></app-player> -->

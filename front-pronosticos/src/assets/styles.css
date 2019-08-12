@@ -856,3 +856,15 @@ fieldset {
 .form-control:focus {
     box-shadow:none!important;
 }
+
+.navbar-item{
+    color:#fff!important;    
+}
+
+.navbar-item:hover,
+.navbar-item:focus,
+.router-link-active{
+    color:#fff!important;   
+    background: #18415d!important; 
+    border-radius: 20px;
+}

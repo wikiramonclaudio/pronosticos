@@ -5,6 +5,7 @@ var path = require('path');
 var bcrypt = require('bcrypt-nodejs');
 var User = require('../models/user');
 var jwt = require('../services/jwt');
+var nodemailer = require('nodemailer');
 
 /*función que me devuelve los usuarios ELIMINARLA*/
 function pruebas(request, response) {
