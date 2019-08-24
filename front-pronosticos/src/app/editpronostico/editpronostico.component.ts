@@ -40,15 +40,13 @@ export class EditpronosticoComponent implements OnInit {
 			this.pronosticoId = '/' + id;					
 							
 			this._pronosticoService.getPronostico(this.token, this.pronosticoId).subscribe(
-		  		(response: any)=>{  	
-		  			console.log(response.pronostico);
+		  		(response: any)=>{  			  			
 		  			if(!response.pronostico){
 
-		  			}else{
-		  				
+		  			}else{		  				
+						this.pronostico = response.pronostico;
+						this.active = true;
 		  			}	
-		  			this.pronostico = response.pronostico;
-		  			this.active = true;
 		  			
 		  		},
 		  		error=>{

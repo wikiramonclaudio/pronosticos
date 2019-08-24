@@ -1,28 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css?family=Arima+Madurai:100,200,300,400,500,700,800,900');
-body {
-	/*margin-top: 60px;*/
-	font-size: 14px;
-	/*font-family: 'Arima Madurai', cursive;*/
-	background-color: #E5E9ED;
-    background: url('assets/fondoazul.jpg');
-    /*background-repeat: no-repeat;*/
-    /*background-size: contain;*/
 
-}
 .btn:hover,
 .btn:focus,
-.btn:active{
+.btn:active {
     outline: 0 !important;
 }
+
 /* entire container, keeps perspective */
 .card-container {
-	  -webkit-perspective: 800px;
-   -moz-perspective: 800px;
-     -o-perspective: 800px;
-        perspective: 800px;
-        margin-bottom: 30px;
+    -webkit-perspective: 800px;
+    -moz-perspective: 800px;
+    -o-perspective: 800px;
+    perspective: 800px;
+    margin-bottom: 30px;
 }
+
 /* flip the pane when hovered */
 /*.card-container:not(.manual-flip):hover .card,
 .card-container.hover.manual-flip .card{
@@ -42,74 +35,82 @@ body {
 }*/
 /* flip speed goes here */
 .card {
-	 -webkit-transition: -webkit-transform .5s;
-   -moz-transition: -moz-transform .5s;
-     -o-transition: -o-transform .5s;
-        transition: transform .5s;
--webkit-transform-style: preserve-3d;
-   -moz-transform-style: preserve-3d;
-     -o-transform-style: preserve-3d;
-        transform-style: preserve-3d;
-	position: relative;
+    -webkit-transition: -webkit-transform .5s;
+    -moz-transition: -moz-transform .5s;
+    -o-transition: -o-transform .5s;
+    transition: transform .5s;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    position: relative;
 }
 
 /* hide back of pane during swap */
-.front, .back {
-	-webkit-backface-visibility: hidden;
-   -moz-backface-visibility: hidden;
-     -o-backface-visibility: hidden;
-        backface-visibility: hidden;
-	position: absolute;
-	top: 0;
-	left: 0;
-	background-color: #FFF;
+.front,
+.back {
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #FFF;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.14);
 }
 
 /* front pane, placed above back */
 .front {
-	z-index: 2;
+    z-index: 2;
 }
 
 /* back, initially hidden pane */
 .back {
-		-webkit-transform: rotateY( 180deg );
-   -moz-transform: rotateY( 180deg );
-     -o-transform: rotateY( 180deg );
-        transform: rotateY( 180deg );
-        z-index: 3;
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+    z-index: 3;
 }
 
-.back .btn-simple{
+.back .btn-simple {
     position: absolute;
     left: 0;
     bottom: 4px;
 }
+
 /*        Style       */
 
 
-.card{
+.card {
     background: none repeat scroll 0 0 #FFFFFF;
     border-radius: 4px;
     color: #444444;
 }
-.card-container, .front, .back {
-	width: 100%;
-	height: 420px;
-	border-radius: 4px;
-	-webkit-box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.16);
--moz-box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.16);
-box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.16);
+
+.card-container,
+.front,
+.back {
+    width: 100%;
+    height: 420px;
+    border-radius: 4px;
+    -webkit-box-shadow: 0px 0px 19px 0px rgba(0, 0, 0, 0.16);
+    -moz-box-shadow: 0px 0px 19px 0px rgba(0, 0, 0, 0.16);
+    box-shadow: 0px 0px 19px 0px rgba(0, 0, 0, 0.16);
 }
-.card .cover{
+
+.card .cover {
     height: 105px;
     overflow: hidden;
     border-radius: 4px 4px 0 0;
 }
-.card .cover img{
+
+.card .cover img {
     width: 100%;
 }
-.card .user{
+
+.card .user {
     border-radius: 50%;
     display: block;
     height: 120px;
@@ -117,68 +118,80 @@ box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.16);
     overflow: hidden;
     width: 160px;
 }
-.card .user img{
+
+.card .user img {
     background: none repeat scroll 0 0 #FFFFFF;
     border: 4px solid #FFFFFF;
     width: 160px;
     height: 120px
 }
 
-.card .content{
+.card .content {
     background-color: rgba(0, 0, 0, 0);
     box-shadow: none;
     padding: 10px 20px 20px;
 }
+
 .card .content .main {
     min-height: 160px;
 }
+
 .card .back .content .main {
     height: 215px;
 }
+
 .card .name {
-		font-family: 'Arima Madurai', cursive;
+    font-family: 'Arima Madurai', cursive;
     font-size: 20px;
     line-height: 28px;
     margin: 10px 0 0;
     text-align: center;
     /*text-transform: capitalize;*/
-    overflow:hidden;
-    white-space:nowrap;
+    overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis;
     width: 100%;
 }
-.card h5{
+
+.card h5 {
     margin: 5px 0;
     font-weight: 400;
     line-height: 20px;
 }
-.card .profession{
+
+.card .profession {
     color: #999999;
     text-align: center;
     margin-bottom: 12px;
 }
+
 .card .footer {
     border-top: 1px solid #EEEEEE;
     color: #999999;
-    margin: 20px 0 0;
+    /* margin: 20px 0 0; */
     padding: 10px 0 0;
     text-align: center;
 }
-.card .footer .social-links{
+
+.card .footer .social-links {
     font-size: 18px;
 }
-.card .footer .social-links a{
+
+.card .footer .social-links a {
     margin: 0 7px;
 }
-.card .footer .btn-simple{
+
+.card .footer .btn-simple {
     margin-top: -6px;
 }
+
 .card .header {
     padding: 15px 20px;
     height: 90px;
 }
-.card .motto{
-		font-family: 'Arima Madurai', cursive;
+
+.card .motto {
+    font-family: 'Arima Madurai', cursive;
     border-bottom: 1px solid #EEEEEE;
     color: #999999;
     font-size: 14px;
@@ -187,34 +200,39 @@ box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.16);
     text-align: center;
 }
 
-.card .stats-container{
-	width: 100%;
-	margin-top: 50px;
-}
-.card .stats{
-	display: block;
-	float: left;
-	width: 33.333333%;
-	text-align: center;
+.card .stats-container {
+    width: 100%;
+    margin-top: 50px;
 }
 
-.card .stats:first-child{
-	border-right: 1px solid #EEEEEE;
+.card .stats {
+    display: block;
+    float: left;
+    width: 33.333333%;
+    text-align: center;
 }
-.card .stats:last-child{
-	border-left: 1px solid #EEEEEE;
+
+.card .stats:first-child {
+    border-right: 1px solid #EEEEEE;
 }
-.card .stats h4{
-		font-family: 'Arima Madurai', cursive;
-	font-weight: 300;
-	margin-bottom: 5px;
+
+.card .stats:last-child {
+    border-left: 1px solid #EEEEEE;
 }
-.card .stats p{
-	color: #777777;
+
+.card .stats h4 {
+    font-family: 'Arima Madurai', cursive;
+    font-weight: 300;
+    margin-bottom: 5px;
 }
+
+.card .stats p {
+    color: #777777;
+}
+
 /*      Just for presentation        */
 
-.title{
+.title {
     color: #506A85;
     text-align: center;
     font-weight: 300;
@@ -222,83 +240,100 @@ box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.16);
     margin-bottom: 90px;
     line-height: 90%;
 }
-.title small{
+
+.title small {
     font-size: 17px;
     color: #999;
     text-transform: uppercase;
     margin: 0;
 }
-.space-30{
-	height: 30px;
-	display: block;
+
+.space-30 {
+    height: 30px;
+    display: block;
 }
-.space-50{
+
+.space-50 {
     height: 50px;
     display: block;
 }
-.space-200{
+
+.space-200 {
     height: 200px;
     display: block;
 }
-.white-board{
+
+.white-board {
     background-color: #FFFFFF;
     min-height: 200px;
     padding: 60px 60px 20px;
 }
-.ct-heart{
+
+.ct-heart {
     color: #F74933;
 }
 
- pre.prettyprint{
+pre.prettyprint {
     background-color: #ffffff;
     border: 1px solid #999;
     margin-top: 20px;
     padding: 20px;
     text-align: left;
 }
-.atv, .str{
+
+.atv,
+.str {
     color: #05AE0E;
 }
-.tag, .pln, .kwd{
-     color: #3472F7;
+
+.tag,
+.pln,
+.kwd {
+    color: #3472F7;
 }
-.atn{
-  color: #2C93FF;
+
+.atn {
+    color: #2C93FF;
 }
-.pln{
-   color: #333;
+
+.pln {
+    color: #333;
 }
-.com{
+
+.com {
     color: #999;
 }
 
-.btn-simple{
+.btn-simple {
     opacity: .8;
     color: #666666;
     background-color: transparent;
 }
 
 .btn-simple:hover,
-.btn-simple:focus{
+.btn-simple:focus {
     background-color: transparent;
     box-shadow: none;
     opacity: 1;
 }
-.btn-simple i{
+
+.btn-simple i {
     font-size: 16px;
 }
 
-.navbar-brand-logo{
+.navbar-brand-logo {
     padding: 0;
 }
-.navbar-brand-logo .logo{
+
+.navbar-brand-logo .logo {
     border: 1px solid #333333;
     border-radius: 50%;
     float: left;
     overflow: hidden;
     width: 60px;
 }
-.navbar .navbar-brand-logo .brand{
+
+.navbar .navbar-brand-logo .brand {
     color: #FFFFFF;
     float: left;
     font-size: 18px;
@@ -308,70 +343,77 @@ box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.16);
     margin-top: 10px;
     width: 60px;
 }
-.navbar-default .navbar-brand-logo .brand{
+
+.navbar-default .navbar-brand-logo .brand {
     color: #555;
 }
 
 
 /*       Fix bug for IE      */
 
-@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-    .front, .back{
+@media screen and (-ms-high-contrast: active),
+(-ms-high-contrast: none) {
+
+    .front,
+    .back {
         -ms-backface-visibility: visible;
         backface-visibility: visible;
     }
 
     .back {
         visibility: hidden;
-        -ms-transition: all 0.2s cubic-bezier(.92,.01,.83,.67);
+        -ms-transition: all 0.2s cubic-bezier(.92, .01, .83, .67);
     }
-    .front{
+
+    .front {
         z-index: 4;
     }
+
     .card-container:not(.manual-flip):hover .back,
-    .card-container.manual-flip.hover .back{
+    .card-container.manual-flip.hover .back {
         z-index: 5;
         visibility: visible;
     }
 }
 
 .span1 {
-    float:left;
-    margin-right:10px;
+    float: left;
+    margin-right: 10px;
 }
 
-.footer a.social{
-    height:30px;
+.footer a.social {
+    height: 30px;
     margin-top: 0px;
     margin-left: 5px;
     margin-right: 5px;
 }
-.margin0-b{
+
+.margin0-b {
     margin-bottom: 0;
 }
 
-.margin5-b{
+.margin5-b {
     margin-bottom: 5px;
 }
 
-img.imagen-ultimos{
-    height:158px;
+img.imagen-ultimos {
+    height: 158px;
 }
 
-a{
-    cursor:pointer;
+a {
+    cursor: pointer;
 }
 
 /*Estilos para la home*/
 h1.h1-customized {
-  color:white;
-  font-size: 5em;
-  font-weight: 800;
+    color: white;
+    font-size: 5em;
+    font-weight: 800;
 }
 
 div.custom {
-  background-color:#2d3c51;
-  border-color:#2d3c51;
+    background-color: #2d3c51;
+    border-color: #2d3c51;
 }
 
 /* 
@@ -382,69 +424,447 @@ AWESOME LANDING PAGE
 Created by https://clemensotto.com
 ----------------------------------
 */
-body, html {
-  /* BACKGROUND */
-  /*background: url(//cdn.clemensotto.com/codepen/img/blurred-bg1.jpg)*/
+body,
+html {
+    /* BACKGROUND */
+    /*background: url(//cdn.clemensotto.com/codepen/img/blurred-bg1.jpg)*/
 }
+
 /*.container {
   padding-top:50px;
 }*/
 h1.h1-customized {
-  color:white;
-  font-size: 4em;
-  font-weight: 800;
+    color: white;
+    font-size: 4em;
+    font-weight: 800;
 }
+
 h2.h2-customized {
-  color:white;
-  font-size: 3em;
-  font-weight: 800;
+    color: white;
+    font-size: 3em;
+    font-weight: 800;
 }
 
 h3.h3-customized {
-  color:white;
-  font-size: 2.5em;
-  font-weight: 800;
+    color: white;
+    font-size: 2.5em;
+    font-weight: 800;
 }
+
 span.custo {
-  color: lightgrey;
-  font-size: 1.5em;
-  font-weight: 800;
+    color: lightgrey;
+    font-size: 1.5em;
+    font-weight: 800;
 }
+
 .inset {
-  text-shadow: 1px 4px 6px grey, 0 0 0 #000, 1px 4px 6px grey
+    text-shadow: 1px 4px 6px grey, 0 0 0 #000, 1px 4px 6px grey
 }
+
 small.col {
-  font-size:0.8em;
-  color:#333;
+    font-size: 0.8em;
+    color: #333;
 }
+
 span.download {
-  color:white;
+    color: white;
 }
+
 a.download {
-  color:#333;
+    color: #333;
 }
+
 a.download:hover {
-  color:#333;
-  text-decoration:none;
-  font-weight:1000;
+    color: #333;
+    text-decoration: none;
+    font-weight: 1000;
 }
+
 div.custom {
-  background-color:#5cb85c;
-  border-color:#fff;
+    background-color: #5cb85c;
+    border-color: #fff;
 }
-.img-responsive, .panel {
-  margin: 0 auto;
+
+.img-responsive,
+.panel {
+    margin: 0 auto;
 }
+
 div.custom-bg {
-  padding-top:250px;
-  background: url(//cdn.clemensotto.com/codepen/img/blurred-bg1-preview.jpg);
-  background-repeat:no-repeat;
-  background-size:100%;
+    padding-top: 250px;
+    background: url(//cdn.clemensotto.com/codepen/img/blurred-bg1-preview.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
 }
 
 /*Estilos menu superior*/
-.enlace-menu{
+.enlace-menu {
     font-family: cursive;
     font-size: 17px;
 }
-    
+
+
+.navbar-main-menu .navbar-item i {
+    margin-right: 5px;
+}
+
+/* FORM STYLES */
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
+fieldset {
+    margin: 0 0 3rem;
+    padding: 0;
+    border: none;
+}
+
+.form-radio,
+.form-group-p {
+    position: relative;
+    margin-top: 2.25rem;
+    margin-bottom: 2.25rem;
+}
+
+.form-inline>.form-group-p,
+.form-inline>.btn {
+    display: inline-block;
+    margin-bottom: 0;
+}
+
+.form-help {
+    margin-top: 0.125rem;
+    margin-left: 0.125rem;
+    color: #b3b3b3;
+    font-size: 0.8rem;
+}
+
+.checkbox .form-help,
+.form-radio .form-help,
+.form-group-p .form-help {
+    position: absolute;
+    width: 100%;
+}
+
+.checkbox .form-help {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.form-radio .form-help {
+    padding-top: 0.25rem;
+    margin-top: -1rem;
+}
+
+.form-group-p input {
+    height: 1.9rem;
+}
+
+.form-group-p textarea {
+    resize: none;
+}
+
+.form-group-p select {
+    width: 100%;
+    font-size: 1rem;
+    height: 1.6rem;
+    padding: 0.125rem 0.125rem 0.0625rem;
+    background: none;
+    border: none;
+    line-height: 1.6;
+    box-shadow: none;
+}
+
+.form-group-p .control-label,
+.control-label {
+    position: absolute;
+    top: 0.25rem;
+    pointer-events: none;
+    padding-left: 0.125rem;
+    z-index: 1;
+    color: #b3b3b3;
+    font-size: 1rem;
+    font-weight: normal;
+    -webkit-transition: all 0.28s ease;
+    transition: all 0.28s ease;
+}
+
+.form-group-p .bar {
+    position: relative;
+    border-bottom: 0.0625rem solid #999;
+    display: block;
+}
+
+.form-group-p .bar::before {
+    content: '';
+    height: 0.125rem;
+    width: 0;
+    left: 50%;
+    bottom: -0.0625rem;
+    position: absolute;
+    background: #337ab7;
+    -webkit-transition: left 0.28s ease, width 0.28s ease;
+    transition: left 0.28s ease, width 0.28s ease;
+    z-index: 2;
+}
+
+.form-group-p input,
+.form-group-p textarea {
+    display: block;
+    background: none;
+    padding: 0.125rem 0.125rem 0.0625rem;
+    font-size: 1rem;
+    border-width: 0;
+    border-color: transparent;
+    line-height: 1.9;
+    width: 100%;
+    color: transparent;
+    -webkit-transition: all 0.28s ease;
+    transition: all 0.28s ease;
+    box-shadow: none;
+}
+
+.form-group-p input[type="file"] {
+    line-height: 1;
+}
+
+.form-group-p input[type="file"]~.bar {
+    display: none;
+}
+
+.form-group-p select,
+.form-group-p input:focus,
+.form-group-p input:valid,
+.form-group-p input.form-file,
+.form-group-p input.has-value,
+.form-group-p textarea:focus,
+.form-group-p textarea:valid,
+.form-group-p textarea.form-file,
+.form-group-p textarea.has-value {
+    color: #333;
+}
+
+.form-group-p select~.control-label,
+.form-group-p input:focus~.control-label,
+.form-group-p input:valid~.control-label,
+.form-group-p input.form-file~.control-label,
+.form-group-p input.has-value~.control-label,
+.form-group-p textarea:focus~.control-label,
+.form-group-p textarea:valid~.control-label,
+.form-group-p textarea.form-file~.control-label,
+.form-group-p textarea.has-value~.control-label
+{
+    font-size: 0.8rem;
+    color: gray;
+    top: -1rem;
+    left: 0;
+}
+
+.form-group-p select:focus,
+.form-group-p input:focus,
+.form-group-p textarea:focus {
+    outline: none;
+}
+
+.form-group-p select:focus~.control-label,
+.form-group-p input:focus~.control-label,
+.form-group-p textarea:focus~.control-label {
+    color: #337ab7;
+}
+
+.form-group-p select:focus~.bar::before,
+.form-group-p input:focus~.bar::before,
+.form-group-p textarea:focus~.bar::before {
+    width: 100%;
+    left: 0;
+}
+
+.checkbox label,
+.form-radio label {
+    position: relative;
+    cursor: pointer;
+    padding-left: 2rem;
+    text-align: left;
+    color: #333;
+    display: block;
+}
+
+.checkbox input,
+.form-radio input {
+    width: auto;
+    opacity: 0.00000001;
+    position: absolute;
+    left: 0;
+}
+
+.radio {
+    margin-bottom: 1rem;
+}
+
+.radio .helper {
+    position: absolute;
+    top: -0.25rem;
+    left: -0.25rem;
+    cursor: pointer;
+    display: block;
+    font-size: 1rem;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: #999;
+}
+
+.radio .helper::before,
+.radio .helper::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: 0.25rem;
+    width: 22px;
+    height: 22px;
+    -webkit-transition: -webkit-transform 0.28s ease;
+    transition: -webkit-transform 0.28s ease;
+    transition: transform 0.28s ease;
+    transition: transform 0.28s ease, -webkit-transform 0.28s ease;
+    border-radius: 50%;
+    border: 0.125rem solid currentColor;
+}
+
+.radio .helper::after {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    background-color: #337ab7;
+    border-color: #337ab7;
+}
+
+.radio label:hover .helper {
+    color: #337ab7;
+}
+
+.radio input:checked~.helper::after {
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+}
+
+.radio input:checked~.helper::before {
+    color: #337ab7;
+}
+
+.checkbox {
+    /* margin-top: 3rem; */
+    margin-bottom: 1rem;
+}
+
+.checkbox .helper {
+    color: #999;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1rem;
+    height: 1rem;
+    z-index: 0;
+    border: 0.125rem solid currentColor;
+    border-radius: 0.0625rem;
+    -webkit-transition: border-color 0.1s ease;
+    transition: border-color 0.1s ease;
+}
+
+.checkbox .helper::before,
+.checkbox .helper::after {
+    position: absolute;
+    height: 0;
+    width: 0.2rem;
+    background-color: #337ab7;
+    display: block;
+    -webkit-transform-origin: left top;
+    transform-origin: left top;
+    border-radius: 0.25rem;
+    content: '';
+    -webkit-transition: opacity 0.18s ease, height 0s linear 0.18s;
+    transition: opacity 0.18s ease, height 0s linear 0.18s;
+    opacity: 0;
+}
+
+.checkbox .helper::before {
+    top: 0.65rem;
+    left: 0.38rem;
+    -webkit-transform: rotate(-135deg);
+    transform: rotate(-135deg);
+    box-shadow: 0 0 0 0.0625rem #fff;
+}
+
+.checkbox .helper::after {
+    top: 0.3rem;
+    left: 0;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+.checkbox label:hover .helper {
+    color: #337ab7;
+}
+
+.checkbox input:checked~.helper {
+    color: #337ab7;
+}
+
+.checkbox input:checked~.helper::after,
+.checkbox input:checked~.helper::before {
+    opacity: 1;
+    -webkit-transition: height 0.18s ease;
+    transition: height 0.18s ease;
+}
+
+.checkbox input:checked~.helper::after {
+    height: 0.5rem;
+}
+
+.checkbox input:checked~.helper::before {
+    height: 1.2rem;
+    -webkit-transition-delay: 0.18s;
+    transition-delay: 0.18s;
+}
+
+.radio+.radio,
+.checkbox+.checkbox {
+    margin-top: 1rem;
+    margin-left: 20px !important;
+}
+
+.has-error .legend.legend,
+.has-error.form-group-p .control-label.control-label {
+    color: #d9534f;
+}
+
+.has-error.form-group-p .form-help,
+.has-error.form-group-p .helper,
+.has-error.checkbox .form-help,
+.has-error.checkbox .helper,
+.has-error.radio .form-help,
+.has-error.radio .helper,
+.has-error.form-radio .form-help,
+.has-error.form-radio .helper {
+    color: #d9534f;
+}
+
+.has-error .bar::before {
+    background: #d9534f;
+    left: 0;
+    width: 100%;
+}
+
+.form-control:focus {
+    box-shadow:none!important;
+}
+
+.navbar-item{
+    color:#fff!important;    
+}
+
+.navbar-item:hover,
+.navbar-item:focus,
+.router-link-active{
+    color:#fff!important;   
+    background: #18415d!important; 
+    border-radius: 20px;
+}
