@@ -29,5 +29,6 @@ api.put('/pronostico/:id', PronosticoController.updatePronostico);
 api.get('/stats', PronosticoController.getStats);
 api.get('/yield', PronosticoController.calcularYield);
 
+// api.get('/scores', PronosticoController.getScores)
 
 module.exports = api;
