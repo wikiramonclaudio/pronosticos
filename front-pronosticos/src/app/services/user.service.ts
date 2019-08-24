@@ -9,7 +9,7 @@ export class UserService{
 	public token:string;
 
 	constructor(private _http :HttpClient){
-		this.url = 'http://localhost:7000/api/';
+		this.url = 'https://mywinningbet.cleverapps.io/api/';
 	}
 
 	/*funci´´on que hace el login en la aplicación*/
