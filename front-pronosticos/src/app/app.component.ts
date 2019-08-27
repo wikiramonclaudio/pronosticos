@@ -31,7 +31,7 @@ export class AppComponent {
      private _route:ActivatedRoute,
      private _router:Router,
      private _pronosticoService : PronosticoService,
-     private _userService : UserService,
+     public _userService : UserService,
   ) 
   { 
      this.identity = _userService.getIdentity();
