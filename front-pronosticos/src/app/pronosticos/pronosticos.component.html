@@ -1,108 +1,159 @@
-  <div class="container" id="pronosticos-content">    
+<div class="container" id="pronosticos-content">
     <h4 class="subtitle is-4 has-text-centered">
         Pronósticos
     </h4>
-    <div class="row" *ngIf="pronosticosFiltrados">
-        <div class="col-md-12">            
-              <div class="container">                  
-                <div class="filter-nav">                                              
-                  <img src="assets/tenis.ico" (click)="getPronosticos(0,'Tenis')" width="50" class="ftl filter-icon"/>
-                  <img src="assets/basket.png" (click)="getPronosticos(0,'Baloncesto')" width="50" class="ftl filter-icon"/>
-                  <img src="assets/futbol.png" (click)="getPronosticos(0,'Fútbol')" width="50" class="ftl filter-icon"/>
-                  <img src="assets/all.png" (click)="getPronosticos(0,'all')" width="55" class="ftl"/>        
-                </div>                                  
-              </div>            
-        </div>          
-    </div>    
-    <div class="row margin30-t" *ngIf="pronosticosFiltrados">    
-        <div class="col-sm-12" *ngIf="sinResultados">
-           <div class="alert alert-info">
-            <strong>Sin resultados!</strong> No se han encontrado resultados para este deporte.
-          </div>
+    <div class="row" *ngIf="pronosticosFiltrados && pronosticosFiltrados.length > 0 && !sinResultados">
+        <div class="col-md-12">
+            <div class="container">
+                <div class="filter-nav">
+                    <img src="assets/tenis.ico" (click)="getPronosticos(0,'Tenis')" width="50"
+                        class="ftl filter-icon" />
+                    <img src="assets/basket.png" (click)="getPronosticos(0,'Baloncesto')" width="50"
+                        class="ftl filter-icon" />
+                    <img src="assets/futbol.png" (click)="getPronosticos(0,'Fútbol')" width="50"
+                        class="ftl filter-icon" />
+                    <img src="assets/all.png" (click)="getPronosticos(0,'all')" width="55" class="ftl" />
+                </div>
+            </div>
         </div>
-        <div class="col-sm-12">                 
+    </div>
+    <div class="row margin30-t" *ngIf="pronosticosFiltrados">
+        <div class="col-sm-12" *ngIf="sinResultados">
+            <article class="message is-warning">
+                <div class="message-header">
+                    <p>Sin resultados!</p>
+                    <!-- <button class="delete" aria-label="delete"></button> -->
+                </div>
+                <div class="message-body">
+                    No se han encontrado resultados para esta búsqueda.
+                </div>
+            </article>
+        </div>
+        <div class="col-sm-12" *ngIf="(identity && identity!= undefined && (identity.role !='ROLE_ADMIN' && identity.role !='ROLE_USER1'))">
+            <article class="message is-warning">
+                <div class="message-header">
+                    <p>Sin acceso a los prnósticos</p>
+                    <!-- <button class="delete" aria-label="delete"></button> -->
+                </div>
+                <div class="message-body">
+                    Estás registrado pero no tienes permisos para ver los pronósticos. 
+                    <br><br>
+                    <!-- <button class="button is-link is-rounded">Accede</button> -->
+                </div>
+            </article>
+        </div>
+        <div class="col-sm-12">
             <div class="col-md-4 col-sm-6" *ngFor="let pronostico of pronosticosFiltrados; let i = index;">
-               <div class="card-container" >             
-                  <div class="card">
-                      <div class="front">
-                          <div class="cover" [ngClass]="{'fondo-tenis': pronostico.deporte == 'Tenis', 'fondo-futbol': pronostico.deporte == 'Fútbol', 'fondo-basket': pronostico.deporte == 'Baloncesto'}">
-                              <div class='post-it' *ngIf="pronostico.finalizado == true"  data-toggle="modal" data-target="#porcentajes">
-                                <span [ngClass]="{'-texto-post-ganada': pronostico.resultado && pronostico.resultado == 'ganada','-texto-post-perdida': pronostico.resultado && pronostico.resultado == 'perdida'}" class="">
-                                    <i class="far fa-thumbs-up" aria-hidden="true" *ngIf="pronostico.resultado == 'ganada'"></i>
-                                    <i class="far fa-thumbs-down" aria-hidden="true" *ngIf="pronostico.resultado == 'perdida'"></i>
-                                  </span>
-                              </div>                                        
-                          </div>
-                          <div class="user">
-                              <img class="img-circle" src="{{pronostico.imageUrl}}" />
-                             <!--  <img class="img-circle" *ngIf="!pronostico.imageUrl" src="http://hiramscornerpub.files.wordpress.com/2011/05/deportes.jpg" /> -->
-                          </div>
-                          <div class="content">
-                              <div class="main">
-                                  <h3 class="name">{{pronostico.partido}}</h3>
-                                  <p class="profession">{{pronostico.torneo}} {{pronostico.fecha | date:"dd/MM/yyyy"}} {{pronostico.hora}}</p>                                
-                                  <p class="text-center margin5-b" title="{{pronostico.apuesta}}" *ngIf="!pronostico.viewObservations"><strong>Pronóstico: </strong>{{pronostico.apuesta}}</p>
-                                  <p class="text-center margin5-b" *ngIf="pronostico.viewObservations">{{pronostico.descripcion}}</p>
-                                  <p class="text-center margin5-b" *ngIf="!pronostico.viewObservations"><strong>Cuota: </strong>{{pronostico.cuota}}</p>
-                                  
-                                  <button type="button" class="btn btn-success btn-block margin5-b" (click)="pronostico.viewObservations = !pronostico.viewObservations" *ngIf="!pronostico.viewObservations && pronostico.descripcion != undefined">Ver comentarios</button>
-                                  <button type="button" class="btn btn-info btn-block margin5-b" (click)="pronostico.viewObservations = !pronostico.viewObservations" *ngIf="pronostico.viewObservations">Ver pronóstico</button>                       
-                                  <p class="profession" *ngIf="!pronostico.viewObservations">Publicado: {{pronostico.fecha_publicacion | date:"dd-MM-yy - HH:mm"}}</p>
-                              </div>                            
-                              <div class="footer" *ngIf="identity.role == 'ROLE_ADMIN' && !pronostico.viewObservations && !pronostico.showWarning">                                                 
-                                  <div class="span1">
-                                      <a [routerLink]="['/edit-pronostico/', pronostico._id]" class="button is-warning is-rounded">
-                                          <i class="fas fa-edit"></i>
-                                          <span><strong>Editar</strong></span>       
-                                      </a>    
-                                  </div>
-                                  <div class="span1">
-                                      <a (click)="pronostico.showWarning = true;" class="button is-danger is-rounded">
-                                          <i class="fas fa-trash"></i>
-                                          <span><strong>Eliminar</strong></span>            
-                                      </a>
-                                  </div>                                                            
-                              </div>    
-                              <div class="footer" *ngIf="identity.role == 'ROLE_ADMIN' && !pronostico.viewObservations && pronostico.showWarning">   
-                                  <a (click)="deletePronostico(pronostico._id);pronostico.showWarning = false" class="btn btn-danger">
-                                          <i class="icon-edit icon-white"></i>
-                                          <span><strong>Eliminar</strong></span>       
-                                  </a> 
-                                  <a (click)="pronostico.showWarning = false" class="btn btn-success">
-                                          <i class="icon-edit icon-white"></i>
-                                          <span><strong>Cancelar</strong></span>       
-                                  </a> 
-                              </div>
-                              <div class="footer" *ngIf="identity.role != 'ROLE_ADMIN' && !pronostico.viewObservations">
-                                  <div style="display:flex">                                
-                                      <a class="btn btn-block btn-social btn-info social" target="_blank"
-                                            href="https://twitter.com/intent/tweet?text=Mira%20esta%20web!.http://www.pronosticos-deportivos.net!!%20Aquí%20encontrarás%20los%20mejores%20pronósticos%20de%20tenis!!" data-hashtags="pronosticos-deportivos, pronósticos, apuestas, pronosticos_tenis">
-                                          <span class="fab fa-twitter"></span>                                         
-                                      </a>
-                                      <a class="btn btn-block btn-social btn-primary social" target="_blank" href="http://facebook.com/sharer.php?u=http%3A%2F%2Fpronosticos-deportivos.net%2F%3Fp%3D1263">
-                                          <span class="fab fa-facebook"></span> 
-                                      </a>                                      
-                                      <a class="btn btn-block btn-social btn-danger social" target="_blank" href="https://plus.google.com/share?url=http%3A%2F%2Fpronosticos-deportivos.net%2F%3Fp%3D1263" >
-                                          <span class="fab fa-google"></span> 
-                                      </a> 
-                                      <a class="btn btn-block btn-social btn-success social" target="_blank" href="whatsapp://send?text=https://pronosticos-deportivos2.herokuapp.com/" data-action="share/whatsapp/share">
-                                          <span class="fab fa-whatsapp"></span> 
-                                      </a>
-                                  </div>                                                                 
-                              </div>
-                          </div>
-                      </div> 
-                  </div>
-               </div> 
-            </div> 
-        </div> 
+                <div class="card-container">
+                    <div class="card">
+                        <div class="front">
+                            <div class="cover"
+                                [ngClass]="{'fondo-tenis': pronostico.deporte == 'Tenis', 'fondo-futbol': pronostico.deporte == 'Fútbol', 'fondo-basket': pronostico.deporte == 'Baloncesto'}">
+                                <div class='post-it' *ngIf="pronostico.finalizado == true">
+                                    <span
+                                        [ngClass]="{'-texto-post-ganada': pronostico.resultado && pronostico.resultado == 'ganada','-texto-post-perdida': pronostico.resultado && pronostico.resultado == 'perdida'}"
+                                        class="">
+                                        <i class="far fa-thumbs-up" aria-hidden="true"
+                                            *ngIf="pronostico.resultado == 'ganada'"></i>
+                                        <i class="far fa-thumbs-down" aria-hidden="true"
+                                            *ngIf="pronostico.resultado == 'perdida'"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="user">
+                                <img class="img-circle" src="{{pronostico.imageUrl}}" />
+                                <!--  <img class="img-circle" *ngIf="!pronostico.imageUrl" src="http://hiramscornerpub.files.wordpress.com/2011/05/deportes.jpg" /> -->
+                            </div>
+                            <div class="content">
+                                <div class="main">
+                                    <h3 class="name">{{pronostico.partido}}</h3>
+                                    <p class="profession">{{pronostico.torneo}} {{pronostico.fecha | date:"dd/MM/yyyy"}}
+                                        {{pronostico.hora}}</p>
+                                    <p class="text-center margin5-b" title="{{pronostico.apuesta}}"
+                                        *ngIf="!pronostico.viewObservations"><strong>Pronóstico:
+                                        </strong>{{pronostico.apuesta}}</p>
+                                    <p class="text-center margin5-b" *ngIf="pronostico.viewObservations">
+                                        {{pronostico.descripcion}}</p>
+                                    <p class="text-center margin5-b" *ngIf="!pronostico.viewObservations"><strong>Cuota:
+                                        </strong>{{pronostico.cuota}}</p>
+
+                                    <button type="button" class="btn btn-success btn-block margin5-b"
+                                        (click)="pronostico.viewObservations = !pronostico.viewObservations"
+                                        *ngIf="!pronostico.viewObservations && pronostico.descripcion != undefined">Ver
+                                        comentarios</button>
+                                    <button type="button" class="btn btn-info btn-block margin5-b"
+                                        (click)="pronostico.viewObservations = !pronostico.viewObservations"
+                                        *ngIf="pronostico.viewObservations">Ver pronóstico</button>
+                                    <p class="profession" *ngIf="!pronostico.viewObservations">Publicado:
+                                        {{pronostico.fecha_publicacion | date:"dd-MM-yy - HH:mm"}}</p>
+                                </div>
+                                <div class="footer"
+                                    *ngIf="identity.role == 'ROLE_ADMIN' && !pronostico.viewObservations && !pronostico.showWarning">
+                                    <div class="span1">
+                                        <a [routerLink]="['/edit-pronostico/', pronostico._id]"
+                                            class="button is-warning is-rounded">
+                                            <i class="fas fa-edit"></i>
+                                            <span><strong>Editar</strong></span>
+                                        </a>
+                                    </div>
+                                    <div class="span1">
+                                        <a (click)="pronostico.showWarning = true;" class="button is-danger is-rounded">
+                                            <i class="fas fa-trash"></i>
+                                            <span><strong>Eliminar</strong></span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="footer"
+                                    *ngIf="identity.role == 'ROLE_ADMIN' && !pronostico.viewObservations && pronostico.showWarning">
+                                    <a (click)="deletePronostico(pronostico._id);pronostico.showWarning = false"
+                                        class="btn btn-danger">
+                                        <i class="icon-edit icon-white"></i>
+                                        <span><strong>Eliminar</strong></span>
+                                    </a>
+                                    <a (click)="pronostico.showWarning = false" class="btn btn-success">
+                                        <i class="icon-edit icon-white"></i>
+                                        <span><strong>Cancelar</strong></span>
+                                    </a>
+                                </div>
+                                <div class="footer"
+                                    *ngIf="identity.role != 'ROLE_ADMIN' && !pronostico.viewObservations">
+                                    <div style="display:flex">
+                                        <a class="btn btn-block btn-social btn-info social" target="_blank"
+                                            href="https://twitter.com/intent/tweet?text=Mira%20esta%20web!.http://www.pronosticos-deportivos.net!!%20Aquí%20encontrarás%20los%20mejores%20pronósticos%20de%20tenis!!"
+                                            data-hashtags="pronosticos-deportivos, pronósticos, apuestas, pronosticos_tenis">
+                                            <span class="fab fa-twitter"></span>
+                                        </a>
+                                        <a class="btn btn-block btn-social btn-primary social" target="_blank"
+                                            href="http://facebook.com/sharer.php?u=http%3A%2F%2Fpronosticos-deportivos.net%2F%3Fp%3D1263">
+                                            <span class="fab fa-facebook"></span>
+                                        </a>
+                                        <a class="btn btn-block btn-social btn-danger social" target="_blank"
+                                            href="https://plus.google.com/share?url=http%3A%2F%2Fpronosticos-deportivos.net%2F%3Fp%3D1263">
+                                            <span class="fab fa-google"></span>
+                                        </a>
+                                        <a class="btn btn-block btn-social btn-success social" target="_blank"
+                                            href="whatsapp://send?text=https://pronosticos-deportivos2.herokuapp.com/"
+                                            data-action="share/whatsapp/share">
+                                            <span class="fab fa-whatsapp"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div> <!-- end row -->
     <div class="row" [hidden]="!pronosticosFiltrados">
         <div class="col-sm-12">
-            <button type="button" class="btn btn-success" (click)="getPronosticos(totalFilteredResults, activeSport)">Cargar más pronósticos..</button>
+            <button type="button" class="btn btn-success"
+                *ngIf="identity && identity!=undefined && (identity.role == 'ROLE_ADMIN' || identity.role == 'ROLE_USER1')"
+                (click)="getPronosticos(totalFilteredResults, activeSport)">Cargar más pronósticos..</button>
         </div>
     </div>
-    <a id="scroll-to-top" href="#pronosticos-content" [hidden]="!allPronosticos"><i class="fa fa-arrow-up" aria-hidden="true"></i></a>
+    <a id="scroll-to-top" href="#pronosticos-content" [hidden]="!allPronosticos"><i class="fa fa-arrow-up"
+            aria-hidden="true"></i></a>
     <div class="row" *ngIf="!pronosticosFiltrados">
         <div class="col-sm-12">
             <h3 class="texto-carga">Cargando los pronósticos más potentes...</h3>
@@ -110,8 +161,33 @@
     </div>
     <div class="row" *ngIf="!pronosticosFiltrados">
         <div class="col-sm-12">
-            <div class='uil-spin-css' style='-webkit-transform:scale(0.6)'><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div></div>
-         </div>    
+            <div class='uil-spin-css' style='-webkit-transform:scale(0.6)'>
+                <div>
+                    <div></div>
+                </div>
+                <div>
+                    <div></div>
+                </div>
+                <div>
+                    <div></div>
+                </div>
+                <div>
+                    <div></div>
+                </div>
+                <div>
+                    <div></div>
+                </div>
+                <div>
+                    <div></div>
+                </div>
+                <div>
+                    <div></div>
+                </div>
+                <div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="space-200"></div>
 </div>

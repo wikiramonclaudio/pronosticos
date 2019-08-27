@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PronosticoService } from '../services/pronostico.service';
 import {UserService} from '../services/user.service';
 import {Pronostico} from '../models/pronostico';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pronosticos',
@@ -18,28 +19,36 @@ export class PronosticosComponent implements OnInit {
 	public responsive_movil;
 	public pronosticosFiltrados:any[];
 	public successAverage;
-  public yield;
-  public busqueda;
-  public sinResultados;
-  public pronosticosCargados: boolean = false;
-  public allPronosticos:boolean = false;
-  public activeSport: string = '';
-  public totalFilteredResults: Number = 0;
+	public yield;
+	public busqueda;
+	public sinResultados;
+	public pronosticosCargados: boolean = false;
+	public allPronosticos:boolean = false;
+	public activeSport: string = '';
+	public totalFilteredResults: Number = 0;
+	showMessage: boolean;
 
   constructor(
   	private _userService: UserService,
-  	private _pronosticoService: PronosticoService
+	  private _pronosticoService: PronosticoService,
+	  private router:Router
   	) {
-  		this.identity = _userService.getIdentity();
-			this.token = _userService.getToken();
-			
+  			this.identity = _userService.getIdentity();
+			this.token = _userService.getToken();			
 			if(this.identity == null){
-				this.identity = {role: 'ROLE_USER'};
+				this.identity = { role: 'ROLE_USER' };
 			}
 	}
 
-  ngOnInit() {
-  	this.getPronosticos(0);
+  ngOnInit() {	
+	if(this.identity.role != 'ROLE_ADMIN' && this.identity.role != 'ROLE_USER1'){	
+		this.showMessage = true;
+		// this.sinResultados = true;
+		this.pronosticosFiltrados = [];
+	}
+	else
+		this.getPronosticos(0);
+	
   	var mediaquery = window.matchMedia("(min-width: 900px)");
       if (mediaquery.matches) {
          this.responsive_movil = false;
@@ -84,10 +93,6 @@ export class PronosticosComponent implements OnInit {
 			},
 			error =>{
 				var alertMessage = <any>error;
-	  			/*if(alertMessage!=null){  				
-	  				this.alertMessage = 'Error, EL artista no ha podido ser guardado';
-	  				console.log(error);
-	  			}*/
 			});
   }
 

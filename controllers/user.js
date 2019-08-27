@@ -7,8 +7,8 @@ var User = require('../models/user');
 var jwt = require('../services/jwt');
 var nodemailer = require('nodemailer');
 
-/*función que me devuelve los usuarios ELIMINARLA*/
-function pruebas(request, response) {
+/*función que me devuelve los usuarios*/
+function getUsers(request, response) {
     User.find((err, users)=>{
         if (err) {
             response.status(500).send({
@@ -109,7 +109,8 @@ function loginUser(req, res) {
                         if (params.gethash) {
                             /*devolver un token de jwt*/
                             res.status(200).send({
-                                token: jwt.createToken(user)
+                                token: jwt.createToken(user),
+                                user
                             });
                         } else {
                             res.status(200).send({
@@ -133,11 +134,11 @@ function updateUser(req, res) {
     var userId = req.params.id;
     var update = req.body;
 
-    if(userId == req.user.sub){
-         return res.status(500).send({
-                message: 'No tienes permiso para actualizar este usuario'
-            });
-    }
+    // if(userId == req.user.sub){
+    //      return res.status(500).send({
+    //             message: 'No tienes permiso para actualizar este usuario'
+    //         });
+    // }
     User.findByIdAndUpdate(userId, update, (err, userUpdated) => {
         if (err) {
             res.status(500).send({
@@ -240,7 +241,7 @@ function getImageFile(req, res){
 }
 
 module.exports = {
-    pruebas,
+    getUsers,
     saveUser,
     loginUser,
     updateUser,

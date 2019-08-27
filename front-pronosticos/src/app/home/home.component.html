@@ -1,0 +1,45 @@
+<h4 class="subtitle is-4 has-text-centered" style="margin-top: 20px;">
+    Login
+</h4>
+
+<div class="box-form" style="margin-top: 40px;">
+    <div class="left">
+        <div class="overlay">
+            <h1>My winning bet</h1>
+            <p>Los mejores pronósticos para apostar están aquí.</p>
+            <!-- <span>
+                <p>login with social media</p>
+                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i> Login with Twitter</a>
+            </span> -->
+        </div>
+    </div>
+
+
+    <div class="right">
+        <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+            <p>¿Todavía no tienes cuenta? <a [routerLink]="['/register']" ><strong>Creala aquí</strong></a> Te llevara menos de un minuto.</p>
+            <div class="inputs">
+                <input placeholder="tuemail@correo.com" type="email" #email="ngModel" name="email"
+                    [(ngModel)]="user.email" id="email" class="form-control" required>
+                <br>
+                <input type="password" #password="ngModel" name="password" [(ngModel)]="user.password" id="password"
+                    class="form-control" placeholder="password" required>
+            </div>
+
+            <br><br>
+
+            <!-- <div class="remember-me--forget-password">            
+            <label>
+                <input type="checkbox" name="item" checked />
+                <span class="text-checkbox">Remember me</span>
+            </label>
+            <p>forget password?</p>
+        </div> -->
+
+            <br>
+            <button>Login</button>
+        </form>
+    </div>
+
+</div>

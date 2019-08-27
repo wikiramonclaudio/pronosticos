@@ -1,0 +1,57 @@
+<h4 class="subtitle is-4 has-text-centered" style="margin-top: 20px;">
+    Registro
+</h4>
+
+<div class="box-form" style="margin-top: 40px;">
+    <div class="left">
+        <div class="overlay">
+            <h1>My winning bet</h1>
+            <p>Los mejores pronósticos para apostar están aquí.</p>
+            <!-- <span>
+                    <p>login with social media</p>
+                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i> Login with Twitter</a>
+                </span> -->
+        </div>
+    </div>
+
+
+    <div class="right">
+        <div *ngIf="alertRegister">
+            <div class="alert alert-info">
+                {{alertRegister}}
+            </div>
+        </div>
+        <form #loginForm="ngForm" (ngSubmit)="register()">
+            <p>Bienvenid@!!, nos alegra mucho verte por aquí. ¿Ya estás registrado? <a [routerLink]="[ '/home' ]"><strong>Accede aquí</strong></a></p>
+            <div class="inputs">
+
+                <input type="text" id="nombre" name="nombre" placeholder="Nombre" #nombre="ngModel"
+                    [(ngModel)]="newUser.name" class="form-control" autocomplete="off" required>
+                <br>
+                <input type="text" #apellidos="ngModel" placeholder="Apellido o Nick" name="apellidos"
+                    [(ngModel)]="newUser.surname" id="apellidos" class="form-control" autocomplete="off" required>
+                <br>
+                <input placeholder="tuemail@correo.com" type="email" #email="ngModel" name="email" autocomplete="off"
+                    [(ngModel)]="newUser.email" id="email" class="form-control" required>
+                <br>
+                <input type="password" #password="ngModel" name="password" [(ngModel)]="newUser.password" id="password"
+                    class="form-control" placeholder="password" autocomplete="off" required>
+            </div>
+
+            <br><br>
+
+            <!-- <div class="remember-me--forget-password">            
+                <label>
+                    <input type="checkbox" name="item" checked />
+                    <span class="text-checkbox">Remember me</span>
+                </label>
+                <p>forget password?</p>
+            </div> -->
+
+            <br>
+            <button>Registrarme</button>
+        </form>
+    </div>
+
+</div>

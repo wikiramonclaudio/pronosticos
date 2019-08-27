@@ -17,6 +17,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { ChartsModule } from 'ng2-charts';
 import { ChartsComponent } from './charts/charts.component';
 import { GraficoDonaComponent } from './grafico-dona/grafico-dona.component';
+import { UsersComponent } from './users/users.component';
+import { RoleAdminGuard, LoginGuard } from './guards/role-admin-guard.guard';
+import { UserService } from './services/user.service';
+import { HomeComponent } from './home/home.component';
+import { RegisterComponent } from './register/register.component';
  
 @NgModule({
   declarations: [
@@ -27,7 +32,10 @@ import { GraficoDonaComponent } from './grafico-dona/grafico-dona.component';
     EditpronosticoComponent,
     ChartsComponent,
     GraficoDonaComponent,
-    PlayerComponent 
+    PlayerComponent,
+    UsersComponent,
+    HomeComponent,
+    RegisterComponent 
   ],
   imports: [
     BrowserModule,
@@ -37,7 +45,11 @@ import { GraficoDonaComponent } from './grafico-dona/grafico-dona.component';
     APP_ROUTES,
     ChartsModule
   ],
-  providers: [],
+  providers: [
+    UserService,
+    RoleAdminGuard,
+    LoginGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

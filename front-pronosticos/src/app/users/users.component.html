@@ -1,0 +1,33 @@
+<h4 class="subtitle is-4 has-text-centered">
+    Usuarios
+</h4>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="box col-md-4 col-sm-6" *ngFor="let user of users">
+            <article class="media">             
+              <div class="media-content">
+                <div class="content">
+                  <p>
+                    <strong>{{user.name}}</strong> - <small>{{user.email}}</small> 
+                    <!-- <small>31m</small> -->
+                    <!-- <br>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa fringilla egestas. Nullam condimentum luctus turpis. -->
+                  </p>
+                </div>
+                <nav class="level is-mobile">
+                  <div class="level-left">
+                    <p style="margin-right: 5px;">Puede ver pronósticos</p>
+                    <a class="level-item" aria-label="reply">
+                      <span>
+                        <i class="fas fa-toggle-off fa-2x has-text-link animated" [ngClass]="{'fa-toggle-off': user.role == 'ROLE_USER', 'fa-toggle-on': user.role == 'ROLE_ADMIN' || user.role == 'ROLE_USER1'}" (click)="updateRole(user)"></i>                        
+                      </span>
+                    </a>         
+                  </div>
+                  <button class="button is-success is-rounded" (click)="updateUser(user)">Guardar</button>
+                </nav>
+              </div>
+            </article>
+          </div>
+    </div>
+</div>

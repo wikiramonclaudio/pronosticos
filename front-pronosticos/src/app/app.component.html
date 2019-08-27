@@ -1,55 +1,4 @@
-<div id="porcentajes" class="modal fade" role="dialog" style="z-index: 99999">
-   <div class="modal-dialog">
-      <!-- Modal content-->
-      <div class="modal-content">
-         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Porcentaje de acierto/Yield</h4>
-         </div>
-         <div class="modal-body" style="background:#5CB85C">
-            <p>Porcentaje de acierto: <strong>{{successAverage}} %</strong></p>
-            <br>
-            <p>Yield: <strong>{{yield}}</strong></p>
-         </div>
-         <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
-         </div>
-      </div>
-   </div>
-</div>
-<!-- <nav class="navbar navbar-default">
-   <div class="container-fluid">
-      <div class="navbar-header" id="cabecera-menu">     
-         <button type="button" class="navbar-toggle collapsed icon-menu-mobile" data-toggle="collapse" data-target="#navbar12">
-         <span class="sr-only">Toggle navigation</span>
-         <span class="icon-bar"></span>
-         <span class="icon-bar"></span>
-         <span class="icon-bar"></span>         
-         </button>
-         <a class="enlace-menu" [routerLink]="['/home']" (click)="showLogin = false" style="padding-top:10px; margin-left:5px;"><img src="assets/logo.svg" id="contenedorSvg1" width="50px" height="50px"/><span class="texto-logo" style=" line-height: 70px;">Pronosticos-Deportivos.net</span></a>
-      </div>
-      <div id="navbar12" class="navbar-collapse collapse" data-toggle="collapse" data-target="#navbar12">
-         <ul class="nav navbar-nav navbar-left">            
-            <li *ngIf="!identity || identity == undefined"><a class="enlace-menu -padding25t" (click)="showLogin = !showLogin"data-toggle="collapse" data-target="#navbar12">Login</a></li>
-            <li *ngIf="identity && identity!= undefined" ><a class="enlace-menu -padding25t" (click)="logout();"data-toggle="collapse" data-target="#navbar12"><i class="fa fa-sign-out" aria-hidden="true"></i>Salir</a></li>
-             <li *ngIf="identity && identity!= undefined" ><a [routerLink]="['/add-pronostico']" class="enlace-menu -padding25t"data-toggle="collapse" data-target="#navbar12">Crear pronóstico</a></li>
-            <li><a class="enlace-menu -padding25t" [routerLink]="['/pronosticos']" (click)="showLogin = false"data-toggle="collapse" data-target="#navbar12">Pronosticos</a></li>
-            <li><a class="enlace-menu -padding25t" [routerLink]="['/contacto']" (click)="showLogin = false"data-toggle="collapse" data-target="#navbar12"><i class="fa fa-address-card" aria-hidden="true"></i>Contacto</a></li>
-            <li><a class="enlace-menu -padding25t" data-toggle="modal" data-target="#porcentajes"data-toggle="collapse" data-target="#navbar12" >Porcentaje de acierto (Yield)</a></li>
-            <li>
-               <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=C47XQVYHDSKZU" target="_blank" class="enlace-menu -padding25t">
-               Propina
-               </a>
-            </li>       
-         </ul>         
-      </div>
-      
-   </div>
-   
-</nav> -->
-
-<nav class="navbar is-info">
-   <!-- <div class="navbar-brand"> -->
+<nav class="navbar is-info" *ngIf="_userService.identity!= undefined && _userService.identity">   
      <a class="navbar-item">
        <!-- <img src="https://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28"> -->
        <img src="assets/logo.svg" alt="" srcset="">
@@ -58,8 +7,7 @@
        <span></span>
        <span></span>
        <span></span>
-     </div>
-   <!-- </div> -->
+     </div>   
  
    <div id="navbarMainMenu"  class="navbar-menu navbar-main-menu">
      <div class="navbar-start">
@@ -67,7 +15,7 @@
          <i class="fas fa-home fa-x2"></i>
          Home
        </a>
-       <a class="navbar-item" *ngIf="identity && identity!= undefined && identity.role == 'ROLE_ADMIN'" [routerLink]="['/add-pronostico']" routerLinkActive="router-link-active" >
+       <a class="navbar-item" *ngIf="_userService.identity && _userService.identity!= undefined && _userService.identity.role == 'ROLE_ADMIN'" [routerLink]="['/add-pronostico']" routerLinkActive="router-link-active" >
          <i class="fas fa-plus fa-x2"></i>
          Crear pronostico
        </a>
@@ -83,6 +31,10 @@
          <i class="far fa-chart-bar fa-x2"></i>
          Estadísticas
        </a>
+       <a class="navbar-item" [routerLink]="['/users']" routerLinkActive="router-link-active" *ngIf="_userService.identity && _userService.identity!= undefined && _userService.identity.role == 'ROLE_ADMIN'">
+         <i class="far fa-user fa-x2"></i>
+         Usuarios
+       </a>
        <!-- <a class="navbar-item" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=C47XQVYHDSKZU" target="_blank">
          <i class="fas fa-hand-holding-usd fa-x2"></i>
          Propina
@@ -93,8 +45,8 @@
      <div class="navbar-end">
        <div class="navbar-item">
          <div class="field is-grouped">
-           <p class="control" *ngIf="!identity || identity == undefined">
-             <a class="bd-tw-button button is-rounded" (click)="showLogin = !showLogin">
+           <p class="control" *ngIf="!_userService.identity || _userService.identity == undefined">
+             <a class="bd-tw-button button is-rounded" [routerLink]="['/home']" >
                <span class="icon">
                      <i class="fas fa-sign-in-alt fa-x2"></i>
                </span>
@@ -103,7 +55,7 @@
                </span>
              </a>
            </p>
-           <p class="control" *ngIf="!identity || identity == undefined">
+           <p class="control" *ngIf="!_userService.identity || _userService.identity == undefined">
              <a class="button is-primary is-rounded" (click)="showLogin = !showLogin">
                <span class="icon">
                  <i class="fas fa-user-plus"></i>
@@ -112,7 +64,7 @@
              </a>
            </p>
 
-           <p class="control" *ngIf="identity && identity!= undefined">
+           <p class="control" *ngIf="_userService.identity && _userService.identity!= undefined">
                <a class="button is-light is-rounded" (click)="logout();">
                  <span class="icon">
                    <i class="fas fa-door-open"></i>
@@ -125,94 +77,7 @@
      </div>
    </div>
  </nav>
+ 
+<router-outlet></router-outlet>
 
-<div *ngIf="showLogin">
-   <!-- PARA EL USUARIO QUE NO SE HA IDENTIFICADO -->
-   <div *ngIf="identity" class="col-sm-12">
-      <div class="alert alert-info">
-         Ya estás loggeado <strong>{{identity.name}}!</strong> 
-      </div>
-   </div>
-   <div class="col-lg-12" *ngIf="!identity">
-      <div class="col-lg-6">
-         
-         <div *ngIf="errorMessage">
-            <div class="alert alert-info">
-               <strong>Error</strong> {{errorMessage}}
-            </div>
-         </div>
-         <form #loginForm="ngForm" class="col-md-7" (ngSubmit)="onSubmit()">
-            <h4 class="title is-4">
-               Identifícate
-            </h4>
-            <p class="form-group-p">
-               <input type="email" #email="ngModel"  name="email" [(ngModel)]="user.email" id="email" class="form-control" required>
-               <label class="control-label" for="email" >Correo electrónico:</label>
-               <i class="bar"></i>
-               <span class="error" *ngIf="!email.valid && email.touched">
-               El email es obligatorio
-               </span>
-            </p>
-            <p class="form-group-p">
-               <input type="password" #password="ngModel" name="password" [(ngModel)]="user.password" id="password" class="form-control" required>               
-               <label class="control-label" for="password" >Contraseña:</label>
-               <i class="bar"></i>
-               <span class="error" *ngIf="!password.valid && password.touched">
-               El password es obligatorio
-               </span>
-            </p>
-            <input type="submit" value="Entrar" class="button is-rounded is-success">
-         </form>
-      </div>
-      <div class="col-lg-6">         
-         <div *ngIf="alertRegister">
-            <div class="alert alert-info">
-               {{alertRegister}}
-            </div>
-         </div>
-         <form #registerForm="ngForm" class="col-md-10" (ngSubmit)="register()">
-            <h4 class="title is-4">
-               Regístrate
-            </h4>
-            <p class="form-group-p">
-               <input type="text" id="nombre" name="nombre" #nombre="ngModel" [(ngModel)]="newUser.name" class="form-control" required>
-               <label class="control-label" for="nombre">Nombre:</label>
-               <i class="bar"></i>
-               <span class="error" *ngIf="!nombre.valid && nombre.touched">
-               El nombre es obligatorio
-               </span>
-            </p>
-            <p class="form-group-p">
-               <input type="text" #apellidos="ngModel" name="apellidos" [(ngModel)]="newUser.surname" id="apellidos" class="form-control" required>
-               <label class="control-label" for="apellidos">Apellidos:</label>
-               <i class="bar"></i>
-               <span class="error" *ngIf="!apellidos.valid && apellidos.touched">
-               El apellidos es obligatorio
-               </span>
-            </p>
-            <p class="form-group-p">
-               <input type="text" #email="ngModel"  name="email" [(ngModel)]="newUser.email" id="email" class="form-control" required>
-               <label class="control-label" for="email" >Correo electrónico:</label>
-               <i class="bar"></i>
-               <span class="error" *ngIf="!email.valid && email.touched">
-               El email es obligatorio
-               </span>
-            </p>
-            <p class="form-group-p">
-               <input type="password" #password="ngModel" name="password" [(ngModel)]="newUser.password" id="password" class="form-control" required>
-               <label class="control-label" for="password" >Contraseña:</label>
-               <i class="bar"></i>
-               <span class="error" *ngIf="!password.valid && password.touched">
-               El password es obligatorio
-               </span>
-            </p>
-            <input type="submit" value="Registrarse" class="button is-rounded is-success">
-         </form>
-      </div>
-   </div>
-   <!-- PARA EL USUARIO QUE NO SE HA IDENTIFICADO -->
-</div>
-<div [class.hidden]="showLogin">
-   <router-outlet></router-outlet>
-</div>
 <!-- <app-player></app-player> -->

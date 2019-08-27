@@ -14,9 +14,6 @@ var md_auth = require('../middlewares/authenticated');
 
 // api.get('/pronosticos', md_auth.ensureAuth, PronosticoController.getPronosticos);
 api.get('/pronosticos', PronosticoController.getPronosticos);
-// api.get('/last-pronosticos', md_auth.ensureAuth, PronosticoController.getUltimosPronosticos);
-api.get('/last-pronosticos', PronosticoController.getUltimosPronosticos);
-// api.get('/pronostico/:id', md_auth.ensureAuth, PronosticoController.getPronostico);
 api.get('/pronostico/:id', PronosticoController.getPronostico);
 api.post('/pronostico', PronosticoController.savePronostico);
 // api.delete('/pronostico/:id', md_auth.ensureAuth, PronosticoController.deletePronostico);

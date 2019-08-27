@@ -7,16 +7,24 @@ import { ContactoComponent } from './contacto/contacto.component';
 import { AddpronosticoComponent } from './addpronostico/addpronostico.component';
 import { EditpronosticoComponent } from './editpronostico/editpronostico.component';
 import { ChartsComponent } from './charts/charts.component';
+import { RoleAdminGuard, LoginGuard } from './guards/role-admin-guard.guard';
+import { UsersComponent } from './users/users.component';
+import { HomeComponent } from './home/home.component';
+import { RegisterComponent } from './register/register.component';
 
+LoginGuard
 
 const appRoutes : Routes = [
-	{path : '', component : PronosticosComponent},	
-	{path: 'pronosticos', component : PronosticosComponent},
-	{path: 'add-pronostico', component : AddpronosticoComponent},
-	{path: 'edit-pronostico/:id', component : EditpronosticoComponent},	
+    {path : '', component : HomeComponent},	
+    {path : 'home', component : HomeComponent},	
+    {path : 'register', component : RegisterComponent},	
+	{path: 'pronosticos',  canActivate: [LoginGuard], component : PronosticosComponent},
+	{path: 'add-pronostico',  canActivate: [RoleAdminGuard], component : AddpronosticoComponent},
+	{path: 'edit-pronostico/:id',  canActivate: [RoleAdminGuard], component : EditpronosticoComponent},	
     {path: 'contacto', component : ContactoComponent},
+    {path : 'users', canActivate: [RoleAdminGuard], component : UsersComponent, data: { title:'Usuarios'}},            
     {path: 'charts', component : ChartsComponent},
-	{path : '**', component : PronosticosComponent} 
+	{path : '**', component :HomeComponent} 
     //lazyload
     // {
     //     path: '',

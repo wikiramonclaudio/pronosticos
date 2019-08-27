@@ -6,10 +6,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class UserService{
 	public url:string;
 	public identity:string;
-	public token:string;
+	public token:string;	
 
 	constructor(private _http :HttpClient){
-		this.url = 'https://mywinningbet.cleverapps.io/api/';
+		// this.url = 'https://mywinningbet.cleverapps.io/api/';
+		this.url = 'http://localhost:8080/api/';
 	}
 
 	/*funci´´on que hace el login en la aplicación*/
@@ -71,5 +72,11 @@ export class UserService{
 		return this._http.post(this.url+'sendEmail', params);
 				// map(res => res.json());
 				
+	}
+
+	// /*función que devuelve los users en la base de datos*/
+	getUsers(token = ''){
+		return this._http.get(this.url + 'users');
+						// .map(res => res.json());
 	}
 }

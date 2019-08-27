@@ -286,23 +286,23 @@ function calcularYield(req, res) {
     });
 };
 
-function getScores(request, res) {
-    var unirest = require("unirest");
+// function getScores(request, res) {
+//     var unirest = require("unirest");
 
-    var req = unirest("GET", "https://api-football-v1.p.rapidapi.com/v2/fixtures/league/1");
+//     var req = unirest("GET", "https://api-football-v1.p.rapidapi.com/v2/fixtures/league/1");
     
-    req.headers({
-        "x-rapidapi-host": "api-football-v1.p.rapidapi.com",
-        "x-rapidapi-key": "b916f1b537msh70ca70c76193321p168889jsna6e9495ed0c7"
-    });
+//     req.headers({
+//         "x-rapidapi-host": "api-football-v1.p.rapidapi.com",
+//         "x-rapidapi-key": "b916f1b537msh70ca70c76193321p168889jsna6e9495ed0c7"
+//     });
     
     
-    req.end(function (res) {
-        if (res.error) throw new Error(res.error);
+//     req.end(function (res) {
+//         if (res.error) throw new Error(res.error);
     
-        console.log(res.body);
-    });
-}
+//         console.log(res.body);
+//     });
+// }
 
 module.exports = {
     savePronostico,
