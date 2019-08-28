@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable()
 export class UserService{
 	public url:string;
-	public identity:string;
+	public identity:any;
 	public token:string;	
 
 	constructor(private _http :HttpClient){
