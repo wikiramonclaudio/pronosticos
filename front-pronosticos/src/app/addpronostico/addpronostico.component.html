@@ -5,7 +5,7 @@
    <form #pronosticoForm="ngForm" (ngSubmit)="onSubmit(pronostico)">
    <div class="col-md-6 col-md-offset-3 col-sm-12">
          <div class="form-radio is-marginless">
-         <label class="is-paddingless" for="deporte">Deporte</label>
+         <!-- <label class="is-paddingless" for="deporte">Deporte</label> -->
          <div class="radio" id="deporte">
             <label>
                   <input autocomplete="off" type="radio" [(ngModel)]="pronostico.deporte"  name="deporte" value="Tenis" #deporte="ngModel">

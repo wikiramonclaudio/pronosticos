@@ -1,7 +1,6 @@
 <!-- <nav class="navbar is-info" *ngIf="_userService.identity!= undefined && _userService.identity">    -->
   <nav class="navbar is-info" [hidden]="_userService.identity == undefined || !_userService.identity">       
-     <a class="navbar-item">
-       <!-- <img src="https://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28"> -->
+     <a class="navbar-item">       
        <img src="assets/logo.svg" alt="" srcset="">
      </a>
      <div class="navbar-burger burger is-pulled-right" style="position: absolute; right:0; top:0; z-index:9999" data-target="navbarMainMenu">
@@ -12,10 +11,10 @@
  
    <div id="navbarMainMenu"  class="navbar-menu navbar-main-menu">
      <div class="navbar-start">
-       <a class="navbar-item" [routerLink]="['/home']" routerLinkActive="router-link-active" >
+       <!-- <a class="navbar-item" [routerLink]="['/home']" routerLinkActive="router-link-active" >
          <i class="fas fa-home fa-x2"></i>
          Home
-       </a>
+       </a> -->
        <a class="navbar-item" *ngIf="_userService.identity && _userService.identity!= undefined && _userService.identity.role == 'ROLE_ADMIN'" [routerLink]="['/add-pronostico']" routerLinkActive="router-link-active" >
          <i class="fas fa-plus fa-x2"></i>
          Crear pronostico
