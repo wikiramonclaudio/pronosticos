@@ -1,157 +1,179 @@
 import { Component, OnInit } from '@angular/core';
 import { PronosticoService } from '../services/pronostico.service';
-import {UserService} from '../services/user.service';
-import {Pronostico} from '../models/pronostico';
+import { UserService } from '../services/user.service';
+import { Pronostico } from '../models/pronostico';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-pronosticos',
-  templateUrl: './pronosticos.component.html',
-  providers : [
-  	PronosticoService,
-  	UserService
-  ]
+	selector: 'app-pronosticos',
+	templateUrl: './pronosticos.component.html',
+	providers: [
+		PronosticoService,
+		UserService
+	]
 })
 export class PronosticosComponent implements OnInit {
 	public identity;
 	public token;
-	public pronosticos:any[];
+	public pronosticos: any[];
 	public responsive_movil;
-	public pronosticosFiltrados:any[];
+	public pronosticosFiltrados: any[];
 	public successAverage;
 	public yield;
 	public busqueda;
 	public sinResultados;
 	public pronosticosCargados: boolean = false;
-	public allPronosticos:boolean = false;
+	public allPronosticos: boolean = false;
 	public activeSport: string = '';
 	public totalFilteredResults: Number = 0;
+
+	sum = 10;
+	throttle = 50;
+	scrollDistance = 0;
+	scrollUpDistance = 1;
+	direction = '';
+	modalOpen = false;
 	showMessage: boolean;
 
-  constructor(
-  	private _userService: UserService,
-	  private _pronosticoService: PronosticoService,
-	  private router:Router
-  	) {
-  			this.identity = _userService.getIdentity();
-			this.token = _userService.getToken();			
-			if(this.identity == null){
-				this.identity = { role: 'ROLE_USER' };
-			}
+	constructor(
+		private _userService: UserService,
+		private _pronosticoService: PronosticoService,
+		private router: Router
+	) {
+		this.identity = _userService.getIdentity();
+		this.token = _userService.getToken();
+		if (this.identity == null) {
+			this.identity = { role: 'ROLE_USER' };
+		}
 	}
 
-  ngOnInit() {	
-	if(this.identity.role != 'ROLE_ADMIN' && this.identity.role != 'ROLE_USER1'){	
-		this.showMessage = true;
-		// this.sinResultados = true;
-		this.pronosticosFiltrados = [];
-	}
-	else
-		this.getPronosticos(0);
-	
-  	var mediaquery = window.matchMedia("(min-width: 900px)");
-      if (mediaquery.matches) {
-         this.responsive_movil = false;
-      } else {
-        this.responsive_movil = true;
-      }
-      document.getElementById('scroll-to-top').onclick = function () {
-          scrollTo(document.body, 0, 100);
-          }
-      
-          function scrollTo(element, to, duration) {
-              if (duration < 0) return;
-              var difference = to - element.scrollTop;
-              var perTick = difference / duration * 2;
-      
-          setTimeout(function() {
-              element.scrollTop = element.scrollTop + perTick;
-              scrollTo(element, to, duration - 2);
-          }, 2);
-      }
-  }
+	ngOnInit() {
+		if (this.identity.role != 'ROLE_ADMIN' && this.identity.role != 'ROLE_USER1') {
+			this.showMessage = true;
+			// this.sinResultados = true;
+			this.pronosticosFiltrados = [];
+		}
+		else
+			this.getPronosticos(0);
 
-  getPronosticos(from, sport:string = ''){		
-	    this.activeSport = sport;
+		var mediaquery = window.matchMedia("(min-width: 900px)");
+		if (mediaquery.matches) {
+			this.responsive_movil = false;
+		} else {
+			this.responsive_movil = true;
+		}
+		document.getElementById('scroll-to-top').onclick = function () {
+			scrollTo(document.body, 0, 100);
+		}
+
+		function scrollTo(element, to, duration) {
+			if (duration < 0) return;
+			var difference = to - element.scrollTop;
+			var perTick = difference / duration * 2;
+
+			setTimeout(function () {
+				element.scrollTop = element.scrollTop + perTick;
+				scrollTo(element, to, duration - 2);
+			}, 2);
+		}
+	}
+
+	getPronosticos(from, sport: string = '') {
+		this.activeSport = sport;
 		this._pronosticoService.getPronosticos(this.token, from, sport).subscribe(
-			(response: any) =>{				
-				if(!response.pronosticos){					
-				}else{
-					if(from == 0){
+			(response: any) => {
+				if (!response.pronosticos) {
+				} else {
+					if (from == 0) {
 						this.totalFilteredResults = 0;
 						this.pronosticosFiltrados = response.pronosticos;
-					}else{
-						let loadedData:Object [] = [];
+					} else {
+						let loadedData: Object[] = [];
 						loadedData = this.pronosticosFiltrados;
 						let newData = response.pronosticos;
 						this.pronosticosFiltrados = loadedData.concat(newData);
 					}
 					this.totalFilteredResults += response.pronosticos.length;
 					// this.pronosticosFiltrados = response.pronosticos;		
-         			this.allPronosticos = true;			
+					this.allPronosticos = true;
 				}
 			},
-			error =>{
+			error => {
 				var alertMessage = <any>error;
 			});
-  }
+	}
 
-  getLastPronosticos(){
-    this._pronosticoService.getLastPronosticos(this.token).subscribe(
-      (response: any) =>{        
-        if(!response.pronosticos){          
-        }else{
-          this.pronosticos = response.pronosticos;
-          this.pronosticosFiltrados = response.pronosticos; 
-          this.pronosticosCargados = true;        
-        }
-      },
-      error =>{
-        var alertMessage = <any>error;
-          /*if(alertMessage!=null){         
-            this.alertMessage = 'Error, EL artista no ha podido ser guardado';
-            console.log(error);
-          }*/
-      });
-  }
+	getLastPronosticos() {
+		this._pronosticoService.getLastPronosticos(this.token).subscribe(
+			(response: any) => {
+				if (!response.pronosticos) {
+				} else {
+					this.pronosticos = response.pronosticos;
+					this.pronosticosFiltrados = response.pronosticos;
+					this.pronosticosCargados = true;
+				}
+			},
+			error => {
+				var alertMessage = <any>error;
+				/*if(alertMessage!=null){         
+				  this.alertMessage = 'Error, EL artista no ha podido ser guardado';
+				  console.log(error);
+				}*/
+			});
+	}
 
-  deletePronostico(id){
+	deletePronostico(id) {
 		this._pronosticoService.deletePronostico(this.token, id).subscribe(
-			response=>{				
+			response => {
 				this.getPronosticos(0);
 			},
-			error=>{
+			error => {
 				console.log(error);
 			}
 		)
-  }
+	}
 
-  filtrar(deporte){
-  		this.pronosticosFiltrados = [];
-  		if(deporte){
-  			if(deporte == 'all'){
-  				for (var pronostico in this.pronosticos) 
-		         { 
-		             this.pronosticosFiltrados.push(this.pronosticos[pronostico]);
-		         }
-  			}else{
-  				for (var pronostico in this.pronosticos) 
-		         { 
-		             if (this.pronosticos[pronostico] && this.pronosticos[pronostico].deporte && this.pronosticos[pronostico].deporte == deporte) {
-		             	this.pronosticosFiltrados.push(this.pronosticos[pronostico]);
-		         	}
-		         }
-  			}
-  			if(this.pronosticosFiltrados.length < 1){
-  				this.sinResultados = true;
-  			}else{
-  				this.sinResultados = false;
-  			}
-	  			
-  		}
-  		  	
-	 		
-  }
+	filtrar(deporte) {
+		this.pronosticosFiltrados = [];
+		if (deporte) {
+			if (deporte == 'all') {
+				for (var pronostico in this.pronosticos) {
+					this.pronosticosFiltrados.push(this.pronosticos[pronostico]);
+				}
+			} else {
+				for (var pronostico in this.pronosticos) {
+					if (this.pronosticos[pronostico] && this.pronosticos[pronostico].deporte && this.pronosticos[pronostico].deporte == deporte) {
+						this.pronosticosFiltrados.push(this.pronosticos[pronostico]);
+					}
+				}
+			}
+			if (this.pronosticosFiltrados.length < 1) {
+				this.sinResultados = true;
+			} else {
+				this.sinResultados = false;
+			}
 
+		}
+
+
+	}
+
+	onScrollDown(ev) {
+		console.log('scrolled down!!', ev);
+
+		// add another 20 items
+		const start = this.sum;
+		this.sum += 20;
+		this.direction = 'down'
+	}
+
+	onUp(ev) {
+		console.log('scrolled up!', ev);
+		// const start = this.sum;
+		// this.sum += 20;
+		// this.prependItems(start, this.sum);
+
+		// this.direction = 'up';
+	}
 
 }

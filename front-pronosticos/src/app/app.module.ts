@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 
 import { APP_ROUTES } from './app.routing';
 
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+
 import { AppComponent } from './app.component';
 import { PronosticosComponent } from './pronosticos/pronosticos.component';
 import { ContactoComponent } from './contacto/contacto.component';
@@ -43,7 +45,8 @@ import { RegisterComponent } from './register/register.component';
     HttpClientModule,
     CommonModule,
     APP_ROUTES,
-    ChartsModule
+    ChartsModule,
+    InfiniteScrollModule
   ],
   providers: [
     UserService,

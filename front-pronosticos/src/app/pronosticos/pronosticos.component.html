@@ -42,7 +42,11 @@
                 </div>
             </article>
         </div>
-        <div class="col-sm-12">
+        <div class="col-sm-12" infinite-scroll
+      
+        [infiniteScrollThrottle]="throttle"
+        (scrolled)="getPronosticos(totalFilteredResults, activeSport)"
+        (scrolledUp)="onUp()">
             <div class="col-md-4 col-sm-6" *ngFor="let pronostico of pronosticosFiltrados; let i = index;">
                 <div class="card-container">
                     <div class="card">
@@ -145,13 +149,13 @@
             </div>
         </div>
     </div> <!-- end row -->
-    <div class="row" [hidden]="!pronosticosFiltrados">
+    <!-- <div class="row" [hidden]="!pronosticosFiltrados">
         <div class="col-sm-12">
             <button type="button" class="btn btn-success"
                 *ngIf="identity && identity!=undefined && (identity.role == 'ROLE_ADMIN' || identity.role == 'ROLE_USER1')"
                 (click)="getPronosticos(totalFilteredResults, activeSport)">Cargar más pronósticos..</button>
         </div>
-    </div>
+    </div> -->
     <a id="scroll-to-top" href="#pronosticos-content" [hidden]="!allPronosticos"><i class="fa fa-arrow-up"
             aria-hidden="true"></i></a>
     <div class="row" *ngIf="!pronosticosFiltrados">
