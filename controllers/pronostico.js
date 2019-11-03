@@ -259,6 +259,7 @@ function getStats(req, res) {
 }
 
 function calcularYield(req, res) {
+    
     Pronostico.find({}, (err, pronosticos) => {
         var beneficiosNetos = 0;
         var ganadas = 0;

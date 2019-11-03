@@ -26,8 +26,7 @@ export class PronosticosComponent implements OnInit {
 	public allPronosticos: boolean = false;
 	public activeSport: string = '';
 	public totalFilteredResults: Number = 0;
-
-	sum = 10;
+	
 	throttle = 50;
 	scrollDistance = 0;
 	scrollUpDistance = 1;
@@ -160,20 +159,13 @@ export class PronosticosComponent implements OnInit {
 
 	onScrollDown(ev) {
 		console.log('scrolled down!!', ev);
-
-		// add another 20 items
-		const start = this.sum;
-		this.sum += 20;
+		
 		this.direction = 'down'
 	}
 
 	onUp(ev) {
 		console.log('scrolled up!', ev);
-		// const start = this.sum;
-		// this.sum += 20;
-		// this.prependItems(start, this.sum);
-
-		// this.direction = 'up';
+	
 	}
 
 }

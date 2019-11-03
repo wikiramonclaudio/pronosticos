@@ -212,10 +212,10 @@ function getImageFile(req, res){
  function enviarMail(req, res) {
     // crear un objeto de transporte reutilizable usando SMTP transport
     var transporter = nodemailer.createTransport({
-        service: 'Gmail',
+        service: 'gmail',
         auth: {
             user: 'makarenosh87@gmail.com',
-            pass: 'makareno'
+            pass: 'fantasia8'
         }
     });
           
@@ -224,15 +224,15 @@ function getImageFile(req, res){
         from: req.body.email,
         to: 'makarenosh@gmail.com, pdasfal@hotmail.com',
         subject: 'Formulario pronosticos-deportivos.net',
-        text: 'Nombre: ' + req.body.nombre + ' ===> Mensaje : ' + req.body.mensaje ,
-        //html: '<b>Nombre:</b>'+req.body.nombre+'<br>' + '<b>Email:</b>'+req.body.email+'<br>' +'<b>Mensaje:</b>'+req.body.mensaje+'<br>'
+        // text: 'Nombre: ' + req.body.nombre + ' ===> Mensaje : ' + req.body.mensaje ,
+        html: '<b>Nombre:</b>'+req.body.nombre+'<br>' + '<b>Email:</b>'+req.body.email+'<br>' +'<b>Mensaje:</b>'+req.body.mensaje+'<br>'
     };
      
     // Envía el correo con el objeto de transporte definido anteriormente
     transporter.sendMail(mailOptions, function(error, info){
         if(error){            
             //return console.log(error);
-            res.status(200).send({message : 'Errpr añ enviar el email'});
+            res.status(500).send({message : 'Errpr añ enviar el email'});
         }else{            
             res.status(200).send({message : 'Se han enviado los datos.'});
         }

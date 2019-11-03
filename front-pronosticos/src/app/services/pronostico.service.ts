@@ -7,8 +7,8 @@ export class PronosticoService{
 	public url:string;
 
 	constructor(private _http :HttpClient){
-		this.url = 'https://mywinningbet.cleverapps.io/api/';
-		// this.url = 'http://localhost:8080/api/';
+		 this.url = 'https://mywinningbet.cleverapps.io/api/';
+		//  this.url = 'http://localhost:8080/api/';
 	}
 
 	/*funcion para añadir un nueuvo pronostico a la BBDD*/
